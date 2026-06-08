@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Hace que la app se adapte a celulares y pantallas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título de la ventana -->
+    <title>SGC - Sistema de Gestión de Calidad</title>
+
+    <!-- Tailwind CSS desde CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configuración visual personalizada -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sanitario: '#D8C3A5',
+                        beige: '#EFE6DD',
+                        grisSuave: '#E5E7EB',
+                        fondo: '#F9FAFB'
+                    }
+                }
+            }
+        }
+    </script>
+
+<!-- Librería oficial de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+<body class="bg-fondo min-h-screen flex flex-col">
+
+    <!-- ENCABEZADO -->
+    <header class="bg-white shadow-md border-b border-grisSuave">
+
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <!-- Logo y nombre -->
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">
+                    SGC
+                </h1>
+
+                <p class="text-sm text-gray-500">
+                    Sistema de Gestión Documental GMP
+                </p>
+            </div>
+
+            <!-- Estado -->
+            <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm font-semibold">
+                Sistema Inicializado
+            </div>
+
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 flex items-center justify-center px-6">
+
+        <div class="bg-white shadow-xl rounded-2xl p-10 max-w-2xl w-full">
+
+            <h2 class="text-4xl font-bold text-gray-800 mb-6">
+                Bienvenido al SGC
+            </h2>
+
+            <p class="text-gray-600 leading-relaxed mb-8">
+                Plataforma de Gestión Documental diseñada para cumplir con:
+            </p>
+
+            <!-- Lista normativa -->
+            <ul class="space-y-4">
+
+                <li class="flex items-center gap-3">
+                    <span class="text-green-600 text-xl">✔</span>
+                    <span class="text-gray-700">
+                        Buenas Prácticas de Fabricación (BPF)
+                    </span>
+                </li>
+
+                <li class="flex items-center gap-3">
+                    <span class="text-green-600 text-xl">✔</span>
+                    <span class="text-gray-700">
+                        Buenas Prácticas de Documentación (BPD)
+                    </span>
+                </li>
+
+                <li class="flex items-center gap-3">
+                    <span class="text-green-600 text-xl">✔</span>
+                    <span class="text-gray-700">
+                        Disposición ANMAT 4159/2023
+                    </span>
+                </li>
+
+                <li class="flex items-center gap-3">
+                    <span class="text-green-600 text-xl">✔</span>
+                    <span class="text-gray-700">
+                        Trazabilidad ALCOA+
+                    </span>
+                </li>
+
+            </ul>
+
+            <!-- Botón -->
+            <div class="mt-10">
+
+                <button class="bg-sanitario hover:opacity-90 transition-all text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
+                    Iniciar Sistema
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- PIE -->
+    <footer class="bg-white border-t border-grisSuave py-4 text-center text-sm text-gray-500">
+
+        SGC © 2026 - Gestión Documental Farmacéutica
+
+    </footer>
+
+<script>
+
+    /*
+    =====================================================
+    CONFIGURACIÓN DE SUPABASE
+    =====================================================
+    */
+
+    // URL de tu proyecto Supabase
+    const SUPABASE_URL = 'https://sdgbgtergeohjmhzgxny.supabase.co';
+
+    // Clave pública segura
+    const SUPABASE_KEY = 'sb_publishable_BD0F8IKnWHVZIjlCQ_hPFQ_hXLM27UXA_TU_PUBLISHABLE_KEY';
+
+    /*
+    =====================================================
+    CONEXIÓN
+    =====================================================
+    */
+
+    // Crear conexión con Supabase
+    const clienteSupabase = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    /*
+    =====================================================
+    VERIFICACIÓN DE CONEXIÓN
+    =====================================================
+    */
+
+    async function verificarConexion() {
+
+        console.log("Intentando conectar con Supabase...");
+
+        // Prueba simple
+        const { data, error } = await clienteSupabase
+            .from('test')
+            .select('*');
+
+        if (error) {
+
+            console.log("Conexión establecida correctamente.");
+            console.log("La tabla aún no existe, esto es normal.");
+
+            alert("SGC conectado correctamente con Supabase");
+
+        } else {
+
+            console.log(data);
+
+            alert("Conexión exitosa con Supabase");
+
+        }
+
+    }
+
+    // Ejecutar prueba
+    verificarConexion();
+
+</script>
+
+</body>
+</html>
