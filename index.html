@@ -6,7 +6,7 @@
     <!-- Hace que la app se adapte a celulares y pantallas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Título de la ventana -->
+    <!-- Título de la ventana --><main class="flex-1 flex items-center justify-center px-6">
     <title>SGC - Sistema de Gestión de Calidad</title>
 
     <!-- Tailwind CSS desde CDN -->
@@ -60,66 +60,255 @@
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="flex-1 flex items-center justify-center px-6">
+   <!-- CONTENIDO PRINCIPAL -->
+<main class="flex-1 p-6">
 
-        <div class="bg-white shadow-xl rounded-2xl p-10 max-w-2xl w-full">
+    <!-- ENCABEZADO DASHBOARD -->
+    <div class="mb-8">
 
-            <h2 class="text-4xl font-bold text-gray-800 mb-6">
-                Bienvenido al SGC
-            </h2>
+        <h2 class="text-4xl font-bold text-gray-800">
+            Dashboard GMP
+        </h2>
 
-            <p class="text-gray-600 leading-relaxed mb-8">
-                Plataforma de Gestión Documental diseñada para cumplir con:
+        <p class="text-gray-500 mt-2">
+            Sistema de Gestión Documental Farmacéutico
+        </p>
+
+    </div>
+
+    <!-- TARJETAS -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+
+        <!-- Tarjeta -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border border-grisSuave">
+
+            <h3 class="text-sm text-gray-500 mb-2">
+                Documentos Totales
+            </h3>
+
+            <p class="text-4xl font-bold text-gray-800">
+                24
             </p>
-
-            <!-- Lista normativa -->
-            <ul class="space-y-4">
-
-                <li class="flex items-center gap-3">
-                    <span class="text-green-600 text-xl">✔</span>
-                    <span class="text-gray-700">
-                        Buenas Prácticas de Fabricación (BPF)
-                    </span>
-                </li>
-
-                <li class="flex items-center gap-3">
-                    <span class="text-green-600 text-xl">✔</span>
-                    <span class="text-gray-700">
-                        Buenas Prácticas de Documentación (BPD)
-                    </span>
-                </li>
-
-                <li class="flex items-center gap-3">
-                    <span class="text-green-600 text-xl">✔</span>
-                    <span class="text-gray-700">
-                        Disposición ANMAT 4159/2023
-                    </span>
-                </li>
-
-                <li class="flex items-center gap-3">
-                    <span class="text-green-600 text-xl">✔</span>
-                    <span class="text-gray-700">
-                        Trazabilidad ALCOA+
-                    </span>
-                </li>
-
-            </ul>
-
-            <!-- Botón -->
-            <div class="mt-10">
-
-                 <button
-    id="btnLogin"
-    class="bg-sanitario hover:opacity-90 transition-all text-white font-semibold px-6 py-3 rounded-xl shadow-lg"
->
-    Iniciar Sesión
-</button>
-                    
-            </div>
 
         </div>
 
-    </main>
+        <!-- Tarjeta -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border border-grisSuave">
+
+            <h3 class="text-sm text-gray-500 mb-2">
+                En Revisión
+            </h3>
+
+            <p class="text-4xl font-bold text-yellow-600">
+                5
+            </p>
+
+        </div>
+
+        <!-- Tarjeta -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border border-grisSuave">
+
+            <h3 class="text-sm text-gray-500 mb-2">
+                Aprobados
+            </h3>
+
+            <p class="text-4xl font-bold text-green-600">
+                16
+            </p>
+
+        </div>
+
+        <!-- Tarjeta -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 border border-grisSuave">
+
+            <h3 class="text-sm text-gray-500 mb-2">
+                Obsoletos
+            </h3>
+
+            <p class="text-4xl font-bold text-red-600">
+                3
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- TABLA DOCUMENTAL -->
+    <div class="bg-white rounded-2xl shadow-xl border border-grisSuave overflow-hidden">
+
+        <!-- Encabezado -->
+        <div class="p-6 border-b border-grisSuave flex justify-between items-center">
+
+            <div>
+
+                <h3 class="text-2xl font-bold text-gray-800">
+                    Gestión Documental
+                </h3>
+
+                <p class="text-gray-500 text-sm mt-1">
+                    Control documental GMP conforme ANMAT 4159/2023
+                </p>
+
+            </div>
+
+            <!-- Botón -->
+            <button
+                class="bg-sanitario hover:opacity-90 transition-all text-white px-5 py-3 rounded-xl font-semibold shadow-md"
+            >
+                + Nuevo Documento
+            </button>
+
+        </div>
+
+        <!-- Tabla -->
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <!-- Encabezado tabla -->
+                <thead class="bg-beige">
+
+                    <tr>
+
+                        <th class="text-left px-6 py-4 text-gray-700 font-semibold">
+                            Código
+                        </th>
+
+                        <th class="text-left px-6 py-4 text-gray-700 font-semibold">
+                            Documento
+                        </th>
+
+                        <th class="text-left px-6 py-4 text-gray-700 font-semibold">
+                            Versión
+                        </th>
+
+                        <th class="text-left px-6 py-4 text-gray-700 font-semibold">
+                            Estado
+                        </th>
+
+                        <th class="text-left px-6 py-4 text-gray-700 font-semibold">
+                            Responsable
+                        </th>
+
+                        <th class="text-left px-6 py-4 text-gray-700 font-semibold">
+                            Última Modificación
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <!-- Datos -->
+                <tbody>
+
+                    <!-- FILA -->
+                    <tr class="border-b border-grisSuave hover:bg-gray-50 transition-all">
+
+                        <td class="px-6 py-4 font-semibold text-gray-800">
+                            POE-001
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            Limpieza de Áreas Productivas
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            03
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                                Aprobado
+                            </span>
+
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            Garantía de Calidad
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-500">
+                            28/05/2026
+                        </td>
+
+                    </tr>
+
+                    <!-- FILA -->
+                    <tr class="border-b border-grisSuave hover:bg-gray-50 transition-all">
+
+                        <td class="px-6 py-4 font-semibold text-gray-800">
+                            FOR-014
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            Registro de Temperatura
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            01
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-semibold">
+                                En Revisión
+                            </span>
+
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            Producción
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-500">
+                            30/05/2026
+                        </td>
+
+                    </tr>
+
+                    <!-- FILA -->
+                    <tr class="hover:bg-gray-50 transition-all">
+
+                        <td class="px-6 py-4 font-semibold text-gray-800">
+                            INS-008
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            Ingreso a Áreas Clasificadas
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            05
+                        </td>
+
+                        <td class="px-6 py-4">
+
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-semibold">
+                                Obsoleto
+                            </span>
+
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-700">
+                            Calidad
+                        </td>
+
+                        <td class="px-6 py-4 text-gray-500">
+                            10/04/2026
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
 
     <!-- PIE -->
     <footer class="bg-white border-t border-grisSuave py-4 text-center text-sm text-gray-500">
