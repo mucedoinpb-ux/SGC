@@ -108,10 +108,13 @@
             <!-- Botón -->
             <div class="mt-10">
 
-                <button class="bg-sanitario hover:opacity-90 transition-all text-white font-semibold px-6 py-3 rounded-xl shadow-lg">
-                    Iniciar Sistema
-                </button>
-
+                 <button
+    id="btnLogin"
+    class="bg-sanitario hover:opacity-90 transition-all text-white font-semibold px-6 py-3 rounded-xl shadow-lg"
+>
+    Iniciar Sesión
+</button>
+                    
             </div>
 
         </div>
@@ -185,6 +188,68 @@
 
     // Ejecutar prueba
     verificarConexion();
+
+/*
+=====================================================
+LOGIN DE USUARIO
+=====================================================
+*/
+
+// Botón login
+const btnLogin = document.getElementById("btnLogin");
+
+// Evento click
+btnLogin.addEventListener("click", async () => {
+
+    // Solicitar email
+    const email = prompt("Ingrese su correo electrónico GMP:");
+
+    // Validar
+    if (!email) {
+
+        alert("Debe ingresar un correo.");
+        return;
+    }
+
+    /*
+    ==========================================
+    LOGIN MAGIC LINK
+    ==========================================
+    */
+
+    const { error } = await clienteSupabase.auth.signInWithOtp({
+
+        email: email,
+
+        options: {
+
+            emailRedirectTo: window.location.href
+
+        }
+
+    });
+
+    /*
+    ==========================================
+    RESULTADO
+    ==========================================
+    */
+
+    if (error) {
+
+        console.error(error);
+
+        alert("Error al iniciar sesión.");
+
+    } else {
+
+        alert(
+            "Se envió un enlace de acceso a su correo electrónico."
+        );
+
+    }
+
+});
 
 </script>
 
