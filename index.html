@@ -354,69 +354,14 @@
         console.log("Intentando conectar con Supabase...");
 
         // Prueba simple
-        const { data, error } = await clienteSupabase
-            .from('test')
-            .select('*');
+       console.log("Modo GMP Local Activo");
 
-        if (error) {
-
-            console.log("Conexión establecida correctamente.");
-            console.log("La tabla aún no existe, esto es normal.");
-
-            alert("SGC conectado correctamente con Supabase");
-
-        } else {
-
-            console.log(data);
-
-            alert("Conexión exitosa con Supabase");
-
-        }
+        alert("SGC iniciado en modo GMP local");
 
     }
 
     // Ejecutar prueba
     verificarConexion();
-
-/*
-=====================================================
-LOGIN DE USUARIO
-=====================================================
-*/
-
-// Botón login
-const btnLogin = document.getElementById("btnLogin");
-
-// Evento click
-btnLogin.addEventListener("click", async () => {
-
-    // Solicitar email
-    const email = prompt("Ingrese su correo electrónico GMP:");
-
-    // Validar
-    if (!email) {
-
-        alert("Debe ingresar un correo.");
-        return;
-    }
-
-    /*
-    ==========================================
-    LOGIN MAGIC LINK
-    ==========================================
-    */
-
-    const { error } = await clienteSupabase.auth.signInWithOtp({
-
-        email: email,
-
-        options: {
-
-            emailRedirectTo: window.location.href
-
-        }
-
-    });
 
     /*
     ==========================================
