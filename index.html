@@ -346,7 +346,10 @@
                 </label>
 
                 <select
-                    id="tipoDocumento"
+    id="tipoDocumento"
+    class="w-full border border-grisSuave rounded-xl px-4 py-3"
+>
+</select>
                     class="w-full border border-grisSuave rounded-xl px-4 py-3"
                 >
                     <option value="POE">POE</option>
@@ -365,14 +368,10 @@
                 </label>
 
                 <select
-                    id="areaDocumento"
-                    class="w-full border border-grisSuave rounded-xl px-4 py-3"
-                >
-                    <option>Garantía de Calidad</option>
-                    <option>Producción</option>
-                    <option>Control de Calidad</option>
-                    <option>Depósito</option>
-                </select>
+    id="areaDocumento"
+    class="w-full border border-grisSuave rounded-xl px-4 py-3"
+>
+</select>
 
             </div>
 
@@ -526,11 +525,82 @@ cancelarDocumento.addEventListener("click", cerrarVentanaModal);
 
 /*
 =====================================================
-CONTADOR DOCUMENTAL
+MAESTRO DE TIPOS DOCUMENTALES GMP
 =====================================================
 */
 
-let contadorDocumentos = 100;
+const tiposDocumentales = [
+
+    { codigo: "ANX", descripcion: "ANEXO" },
+    { codigo: "CER", descripcion: "CERTIFICADO" },
+    { codigo: "DOT", descripcion: "DOCUMENTO TÉCNICO" },
+    { codigo: "ESP", descripcion: "ESPECIFICACIONES" },
+    { codigo: "FOD", descripcion: "ANÁLISIS FODA" },
+    { codigo: "GFA", descripcion: "GUÍA DE FABRICACIÓN" },
+    { codigo: "IAA", descripcion: "INSTRUCTIVO DE ANTÍGENOS Y ANTISUEROS" },
+    { codigo: "IAV", descripcion: "INSTRUCTIVO DE ANTIVENENO" },
+    { codigo: "INS", descripcion: "INSTRUCTIVO" },
+    { codigo: "MAC", descripcion: "MANUAL DE CALIDAD" },
+    { codigo: "PLM", descripcion: "PLAN DE MEJORAS" },
+    { codigo: "PLN", descripcion: "PLAN" },
+    { codigo: "PLT", descripcion: "PLANTILLA" },
+    { codigo: "POC", descripcion: "POLÍTICA DE CALIDAD" },
+    { codigo: "POE", descripcion: "PROCEDIMIENTO OPERATIVO ESTÁNDAR" },
+    { codigo: "PRT", descripcion: "PROTOCOLO" },
+    { codigo: "REG", descripcion: "REGISTRO" },
+    { codigo: "SMF", descripcion: "SITE MASTER FILE" },
+    { codigo: "TAB", descripcion: "TABLA" },
+    { codigo: "TDA", descripcion: "TÉCNICA DE ANÁLISIS" }
+
+];
+
+/*
+=====================================================
+MAESTRO DE ACTIVIDADES
+=====================================================
+*/
+
+const actividades = [
+
+    {
+        codigo: "001",
+        nombre: "Gestión de la Calidad"
+    },
+
+    {
+        codigo: "002",
+        nombre: "Producción"
+    },
+
+    {
+        codigo: "003",
+        nombre: "Control de Calidad"
+    },
+
+    {
+        codigo: "004",
+        nombre: "Microbiología"
+    },
+
+    {
+        codigo: "005",
+        nombre: "Fisicoquímico"
+    },
+
+    {
+        codigo: "006",
+        nombre: "Depósito"
+    }
+
+];
+
+/*
+=====================================================
+CORRIDO DOCUMENTAL GMP
+=====================================================
+*/
+
+let correlativoDocumental = 1;
 
 /*
 =====================================================
@@ -538,12 +608,78 @@ CREAR DOCUMENTO
 =====================================================
 */
 
+/*
+=====================================================
+CARGAR TIPOS DOCUMENTALES
+=====================================================
+*/
+
+function cargarTiposDocumentales() {
+
+    const selector = document.getElementById("tipoDocumento");
+
+    selector.innerHTML = "";
+
+    tiposDocumentales.forEach((tipo) => {
+
+        selector.innerHTML += `
+        
+            <option value="${tipo.codigo}">
+                ${tipo.codigo} - ${tipo.descripcion}
+            </option>
+
+        `;
+
+    });
+
+}
+
+/*
+=====================================================
+CARGAR ACTIVIDADES
+=====================================================
+*/
+
+function cargarActividades() {
+
+    const selector = document.getElementById("areaDocumento");
+
+    selector.innerHTML = "";
+
+    actividades.forEach((actividad) => {
+
+        selector.innerHTML += `
+        
+            <option value="${actividad.codigo}">
+                ${actividad.codigo} - ${actividad.nombre}
+            </option>
+
+        `;
+
+    });
+
+}
+
+/*
+=====================================================
+INICIALIZAR MAESTROS
+=====================================================
+*/
+
+cargarTiposDocumentales();
+
+cargarActividades();
+
 guardarDocumento.addEventListener("click", () => {
 
     // Obtener datos
     const tipo = document.getElementById("tipoDocumento").value;
 
     const area = document.getElementById("areaDocumento").value;
+
+const actividadSeleccionada = actividades.find(
+    a => a.codigo === area
+);
 
     const nombre = document.getElementById("nombreDocumento").value;
 
@@ -566,9 +702,46 @@ guardarDocumento.addEventListener("click", () => {
     ==========================================
     */
 
-    contadorDocumentos++;
+   /*
+==========================================
+AÑO GMP
+==========================================
+*/
 
-    const codigo = `${tipo}-${contadorDocumentos}`;
+const año = new Date().getFullYear().toString().slice(-2);
+
+/*
+==========================================
+CORRELATIVO
+==========================================
+*/
+
+const correlativo = String(correlativoDocumental)
+    .padStart(3, "0");
+
+/*
+==========================================
+NÚMERO DOCUMENTO
+==========================================
+*/
+
+const numeroDocumento = "001";
+
+/*
+==========================================
+CÓDIGO GMP
+==========================================
+*/
+
+const codigo = `${area}-${tipo}-${numeroDocumento}-${año}-${correlativo}`;
+
+/*
+==========================================
+ACTUALIZAR CORRELATIVO
+==========================================
+*/
+
+correlativoDocumental++;
 
     /*
     ==========================================
@@ -609,7 +782,7 @@ guardarDocumento.addEventListener("click", () => {
             </td>
 
             <td class="px-6 py-4 text-gray-700">
-                ${area}
+              ${actividadSeleccionada.nombre}
             </td>
 
             <td class="px-6 py-4 text-gray-500">
