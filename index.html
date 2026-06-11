@@ -59,9 +59,35 @@
         </div>
     </header>
 
+<!-- MENÚ PRINCIPAL -->
+<nav class="bg-white border-b border-grisSuave">
+
+    <div class="max-w-7xl mx-auto px-6 py-3 flex gap-4">
+
+        <button
+            id="menuDashboard"
+            class="bg-sanitario text-white px-4 py-2 rounded-lg font-semibold"
+        >
+            Dashboard
+        </button>
+
+        <button
+            id="menuMaestros"
+            class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold"
+        >
+            Maestros GMP
+        </button>
+
+    </div>
+
+</nav>
+
     <!-- CONTENIDO PRINCIPAL -->
    <!-- CONTENIDO PRINCIPAL -->
-<main class="flex-1 p-6">
+<main
+    id="pantallaDashboard"
+    class="flex-1 p-6"
+>
 
     <!-- ENCABEZADO DASHBOARD -->
     <div class="mb-8">
@@ -408,6 +434,85 @@
     </div>
 
 </div>
+
+<!-- PANTALLA MAESTROS GMP -->
+<section
+    id="pantallaMaestros"
+    class="hidden p-6"
+>
+
+    <div class="mb-8">
+
+        <h2 class="text-4xl font-bold text-gray-800">
+            Maestros GMP
+        </h2>
+
+        <p class="text-gray-500 mt-2">
+            Configuración maestra del sistema documental
+        </p>
+
+    </div>
+
+    <!-- TABLA ÁREAS -->
+    <div class="bg-white rounded-2xl shadow-xl border border-grisSuave overflow-hidden mb-10">
+
+        <div class="p-6 border-b border-grisSuave flex justify-between items-center">
+
+            <div>
+
+                <h3 class="text-2xl font-bold text-gray-800">
+                    Áreas GMP
+                </h3>
+
+                <p class="text-gray-500 text-sm mt-1">
+                    Gestión de áreas y subáreas
+                </p>
+
+            </div>
+
+            <button
+                class="bg-sanitario text-white px-4 py-2 rounded-xl font-semibold"
+            >
+                + Nueva Área
+            </button>
+
+        </div>
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-beige">
+
+                    <tr>
+
+                        <th class="text-left px-6 py-4">
+                            Código
+                        </th>
+
+                        <th class="text-left px-6 py-4">
+                            Área
+                        </th>
+
+                        <th class="text-left px-6 py-4">
+                            Área Padre
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaAreasMaestro">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
 
 </main>
 
@@ -819,6 +924,90 @@ correlativoDocumental++;
     cerrarVentanaModal();
 
 });
+
+/*
+=====================================================
+NAVEGACIÓN ENTRE PANTALLAS
+=====================================================
+*/
+
+const menuDashboard = document.getElementById("menuDashboard");
+
+const menuMaestros = document.getElementById("menuMaestros");
+
+const pantallaDashboard = document.getElementById("pantallaDashboard");
+
+const pantallaMaestros = document.getElementById("pantallaMaestros");
+
+/*
+=====================================================
+ABRIR DASHBOARD
+=====================================================
+*/
+
+menuDashboard.addEventListener("click", () => {
+
+    pantallaDashboard.classList.remove("hidden");
+
+    pantallaMaestros.classList.add("hidden");
+
+});
+
+/*
+=====================================================
+ABRIR MAESTROS
+=====================================================
+*/
+
+menuMaestros.addEventListener("click", () => {
+
+    pantallaDashboard.classList.add("hidden");
+
+    pantallaMaestros.classList.remove("hidden");
+
+});
+
+/*
+=====================================================
+CARGAR TABLA MAESTRA ÁREAS
+=====================================================
+*/
+
+function cargarTablaAreas() {
+
+    const tabla = document.getElementById(
+        "tablaAreasMaestro"
+    );
+
+    tabla.innerHTML = "";
+
+    actividades.forEach((actividad) => {
+
+        tabla.innerHTML += `
+        
+            <tr class="border-b border-grisSuave">
+
+                <td class="px-6 py-4 font-semibold">
+                    ${actividad.codigo}
+                </td>
+
+                <td class="px-6 py-4">
+                    ${actividad.nombre}
+                </td>
+
+                <td class="px-6 py-4">
+                    -
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+cargarTablaAreas();
 
 </script>
 
